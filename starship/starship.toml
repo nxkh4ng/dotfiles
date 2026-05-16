@@ -1,0 +1,22 @@
+scan_timeout = 10
+command_timeout = 500
+add_newline = true
+follow_symlinks = false
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$cmd_duration\
+$line_break\
+$character"""
+
+[git_branch]
+symbol = " "
+
+[git_status]
+ignore_submodules = true
+format = '([\[$staged$modified$untracked$conflicted\]]($style) )'
+
+[cmd_duration]
+min_time = 2000
