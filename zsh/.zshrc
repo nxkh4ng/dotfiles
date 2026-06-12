@@ -1,40 +1,25 @@
 [[ $- != *i* ]] && return
 
 # History
-HISTFILE=~/.zsh_history
+HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=10000
 SAVEHIST=20000
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
-setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
 
 # Lesspipe
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Zsh completion
-autoload -Uz compinit && compinit
-
-# Grep color
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-# Homebrew
+# Homebrew (must be early for fpath)
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 export HOMEBREW_CURL_RETRIES=3
 
-# Go
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
-
-# Starship
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-eval "$(starship init zsh)"
-
-# FZF
+# FZF (must be early for fpath)
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --threads 4"
 export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git --max-depth 4"
 
@@ -64,14 +49,48 @@ export FZF_ALT_C_OPTS="\
 
 eval "$(fzf --zsh)"
 
-# EZA 
-if command -v eza &>/dev/null; then
-    alias ls="eza --icons --group-directories-first -l"
-    alias lh="eza --icons --group-directories-first -lh"
-    alias la="eza --icons --group-directories-first -la"
-    alias lt="eza --icons --group-directories-first --tree"
-    alias lt2="eza --icons --group-directories-first --tree --level=2"
-    alias lt3="eza --icons --group-directories-first --tree --level=3"
+# Deduplicate fpath and remove non-existent directories
+typeset -gU fpath
+fpath=("${(@)fpath:#/usr/local/share/zsh/site-functions}")
+
+# Zsh completion with caching
+autoload -Uz compinit
+zcompdump=${ZDOTDIR:-$HOME}/.zcompdump
+if [[ -s $zcompdump && $(find $zcompdump -mmin +60) == "" ]]; then
+    compinit -C
+else
+    compinit
 fi
 
+# Grep color
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# env
+export EDITOR=nvim
+export OPENCODE_ENABLE_EXA=1
+
+# wsl shutdown
+alias wsl-shutdown='/mnt/c/Windows/System32/wsl.exe --shutdown'
+
+# Go
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+
+# Starship
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval "$(starship init zsh)"
+
+# EZA
+if command -v eza &>/dev/null; then
+    alias ls="eza --icons --group-directories-first --git -l"
+    alias lh="eza --icons --group-directories-first --git -lh"
+    alias la="eza --icons --group-directories-first --git -la"
+    alias lt="eza --icons --group-directories-first --git --tree"
+    alias lt2="eza --icons --group-directories-first --git --tree --level=2"
+    alias lt3="eza --icons --group-directories-first --git --tree --level=3"
+fi
+
+# ZSH syntax highlighting
 source /home/linuxbrew/.linuxbrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
