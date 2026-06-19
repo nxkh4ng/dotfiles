@@ -1,4 +1,5 @@
 go/
+nvim/
 
 .zsh_history
 .zcompdump
