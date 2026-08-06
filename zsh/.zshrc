@@ -16,16 +16,19 @@ setopt INC_APPEND_HISTORY
 autoload -Uz compinit && compinit
 
 # Grep color
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias grep='grep --color=always'
+alias fgrep='fgrep --color=always'
+alias egrep='egrep --color=always'
 
 # env
 export EDITOR=nvim
 export OPENCODE_ENABLE_EXA=1
+export OPENCODE_EXPERIMENTAL_LSP_TOOL=true
+export COLORTERM=truecolor
 
 # wsl shutdown
-alias wsl-shutdown='/mnt/c/Windows/System32/wsl.exe --shutdown'
+alias wsldie='/mnt/c/Windows/System32/wsl.exe --shutdown'
+alias vscode='/mnt/c/Users/Kh4nG/AppData/Local/Programs/"Microsoft VS Code"/bin/code'
 
 # Homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
