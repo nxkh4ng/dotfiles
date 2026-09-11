@@ -26,9 +26,10 @@ export OPENCODE_ENABLE_EXA=1
 export OPENCODE_EXPERIMENTAL_LSP_TOOL=true
 export COLORTERM=truecolor
 
-# wsl shutdown
+# alias
 alias wsldie='/mnt/c/Windows/System32/wsl.exe --shutdown'
-alias vscode='/mnt/c/Users/Kh4nG/AppData/Local/Programs/"Microsoft VS Code"/bin/code'
+alias oc='opencode'
+alias nv='nvim'
 
 # Homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
@@ -38,16 +39,15 @@ export HOMEBREW_NO_INSTALL_CLEANUP=1
 export HOMEBREW_CURL_RETRIES=3
 
 # Go
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
+export PATH="$PATH:$HOME/go/bin"
 
 # Starship
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
 
 # FZF
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --threads 4"
-export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git --max-depth 4"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude .cache --threads 4"
+export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git --exclude .cache --max-depth 4"
 
 export FZF_DEFAULT_OPTS="\
 --ansi \
@@ -77,12 +77,12 @@ eval "$(fzf --zsh)"
 
 # EZA 
 if command -v eza &>/dev/null; then
-    alias ls="eza --icons --group-directories-first --git -l"
-    alias lh="eza --icons --group-directories-first --git -lh"
-    alias la="eza --icons --group-directories-first --git -la"
-    alias lt="eza --icons --group-directories-first --git --tree"
-    alias lt2="eza --icons --group-directories-first --git --tree --level=2"
-    alias lt3="eza --icons --group-directories-first --git --tree --level=3"
+    alias ls="eza --icons --group-directories-first -l"
+    alias lh="eza --icons --group-directories-first -lh"
+    alias la="eza --icons --group-directories-first -la"
+    alias lt="eza --icons --group-directories-first --tree"
+    alias lt2="eza --icons --group-directories-first --tree --level=2"
+    alias lt3="eza --icons --group-directories-first --tree --level=3"
 fi
 
 # ZSH syntax highlighting

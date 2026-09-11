@@ -74,7 +74,6 @@ return {
 
 			svelte = {},
 			emmet_language_server = {},
-			basedpyright = {},
 			html = {},
 			cssls = {},
 			ts_ls = {},
@@ -87,33 +86,9 @@ return {
 			vim.lsp.enable(name)
 		end
 
-		-- Diagnostic config
-		vim.diagnostic.config({
-			update_in_insert = false,
-			severity_sort = true,
-			float = { source = "if_many" },
-			underline = { severity = { min = vim.diagnostic.severity.WARN } },
-			virtual_text = {
-				prefix = "■",
-				source = "if_many",
-			},
-			jump = {
-				keys = true,
-				on_jump = function(_, bufnr)
-					vim.diagnostic.open_float({
-						bufnr = bufnr,
-						scope = "cursor",
-						focus = false,
-					})
-				end,
-			},
-		})
-		-- vim.keymap.set("n", "<leader>sd", vim.diagnostic.setloclist)
-
 		-- Builtin LPS Keymaps
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
 		vim.keymap.set("n", "df", vim.diagnostic.open_float)
-		vim.keymap.set("n", "gra", vim.lsp.buf.code_action)
 	end,
 }

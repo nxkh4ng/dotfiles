@@ -14,7 +14,6 @@ return {
 	},
 	opts = {
 		formatters_by_ft = {
-			python = { "isort", "black" },
 			go = { "gofumpt", "goimports" },
 			lua = { "stylua" },
 			markdown = { "prettierd", "prettier", stop_after_first = true },

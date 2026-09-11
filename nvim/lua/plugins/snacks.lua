@@ -16,7 +16,17 @@ return {
 		},
 		picker = {
 			enabled = true,
-			exclude = { ".git", "node_modules", "build", "dist", "vendor" },
+			exclude = { ".git", "node_modules", "bin", "build", "dist", "vendor" },
+			win = {
+				input = {
+					keys = {
+						["<A-n>"] = { "list_down", mode = { "i", "n" } },
+						["<A-p>"] = { "list_up", mode = { "i", "n" } },
+						["<A-N>"] = { "preview_scroll_down", mode = { "i", "n" } },
+						["<A-P>"] = { "preview_scroll_up", mode = { "i", "n" } },
+					},
+				},
+			},
 		},
 	},
 	keys = {
@@ -70,12 +80,12 @@ return {
 			end,
 		},
 		{
-			"<leader>/w",
+			"<leader>/",
 			function()
 				Snacks.picker.grep_word()
 			end,
 			desc = "Visual selection or word",
-			mode = { "n", "x" },
+			mode = "v",
 		},
 		{
 			"<leader>sh",

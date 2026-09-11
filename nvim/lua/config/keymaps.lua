@@ -6,7 +6,6 @@ map("n", "<Esc>", "<cmd>nohlsearch<cr>")
 map("t", "<Esc><Esc>", "<C-\\><C-n>")
 
 map("n", "J", "mzJ`z")
-map("n", "<leader>Y", '"+Y')
 map("v", "<leader>y", '"+y')
 
 -- Center when moving
@@ -37,9 +36,16 @@ map("n", "H", "<cmd>tabprevious<cr>")
 -- Open termial below
 map("n", "<leader>tm", function()
 	local current_height = vim.api.nvim_win_get_height(0)
-	local height_percent = math.floor(current_height * 35 / 100)
+	local height_percent = math.floor(current_height * 30 / 100)
 	vim.cmd.vnew()
-	vim.cmd.term()
 	vim.cmd.wincmd("J")
 	vim.api.nvim_win_set_height(0, height_percent)
+	vim.cmd.term()
+	vim.cmd.startinsert()
+end)
+
+-- Open terminal in tab
+map("n", "<leader>tt", function()
+	vim.cmd.tabnew()
+	vim.cmd.term()
 end)

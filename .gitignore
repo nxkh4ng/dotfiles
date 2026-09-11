@@ -1,4 +1,5 @@
 go/
 
 .zsh_history
-.zcompdump
+.zcompdump*
+.zprofile

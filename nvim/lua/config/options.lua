@@ -7,7 +7,6 @@ vim.g.have_nerd_font = true
 
 -- Basic
 opt.number = true
-opt.relativenumber = true
 opt.cursorline = true
 opt.splitbelow = true
 opt.splitright = true
@@ -31,6 +30,7 @@ opt.hlsearch = false
 opt.inccommand = "split"
 
 -- File handling
+opt.autoread = true
 opt.confirm = true
 opt.undofile = true
 opt.swapfile = false
@@ -60,6 +60,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"lua",
 		"python",
 		"markdown",
+		"html",
 		"javascript",
 		"typescript",
 		"javascriptreact",
