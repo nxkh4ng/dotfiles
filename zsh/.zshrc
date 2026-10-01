@@ -38,6 +38,16 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 export HOMEBREW_CURL_RETRIES=3
 
+# pnpm
+export PNPM_HOME='/home/kh4ng/.local/share/pnpm'
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+
+# mason.nvim LSP path
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
+
 # Go
 export PATH="$PATH:$HOME/go/bin"
 
@@ -87,3 +97,11 @@ fi
 
 # ZSH syntax highlighting
 source /home/linuxbrew/.linuxbrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# pnpm
+export PNPM_HOME='/home/kh4ng/.local/share/pnpm'
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
